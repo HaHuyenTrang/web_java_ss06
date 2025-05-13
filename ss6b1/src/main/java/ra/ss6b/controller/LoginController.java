@@ -4,15 +4,19 @@ import ra.ss6b.model.User;
 import ra.ss6b.service.UserService;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+
+@WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
     private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+
     }
 
     @Override
@@ -26,7 +30,8 @@ public class LoginController extends HttpServlet {
             resp.sendRedirect("books");
         } else {
             req.setAttribute("error", "Sai tài khoản hoặc mật khẩu!");
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+
         }
     }
 }

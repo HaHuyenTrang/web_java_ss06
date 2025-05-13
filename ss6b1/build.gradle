@@ -12,6 +12,7 @@ repositories {
 
 ext {
     junitVersion = '5.10.2'
+    springVersion = '5.3.32'
 }
 
 sourceCompatibility = '1.8'
@@ -29,7 +30,18 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor("org.projectlombok:lombok:1.18.24")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
+
+
+    // spring dependency
+    implementation("org.springframework:spring-core:${springVersion}")
+    implementation("org.springframework:spring-web:${springVersion}")
+    implementation("org.springframework:spring-webmvc:${springVersion}")
+    implementation("org.springframework:spring-tx:${springVersion}")
+    implementation("org.springframework:spring-orm:${springVersion}")
+    implementation("org.springframework:spring-context:${springVersion}")
+    implementation("org.springframework:spring-context-support:${springVersion}")
+
 }
 
 test {

@@ -1,17 +1,21 @@
 package ra.ss6b.controller;
 
+import org.springframework.stereotype.Controller;
 import ra.ss6b.model.Book;
 import ra.ss6b.service.BookService;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
+@WebServlet(name = "BookController", value = "/books")
 public class BookController extends HttpServlet {
     private final BookService service = new BookService();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(2);
         String action = req.getParameter("action");
         if (action == null) action = "list";
 
@@ -22,13 +26,16 @@ public class BookController extends HttpServlet {
             case "edit":
                 String code = req.getParameter("bookCode");
                 Book b = service.findByCode(code);
+                req.setAttribute("now", new java.util.Date());
                 req.setAttribute("book", b);
                 req.getRequestDispatcher("formEdit.jsp").forward(req, resp);
                 break;
             default:
                 List<Book> list = service.findAll();
                 req.setAttribute("books", list);
-                req.getRequestDispatcher("listBook.jsp").forward(req, resp);
+                req.getRequestDispatcher("views/listBook.jsp").forward(req, resp);
+
+
         }
     }
 

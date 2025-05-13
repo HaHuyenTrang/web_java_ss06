@@ -4,15 +4,17 @@ import ra.ss6b.model.User;
 import ra.ss6b.service.UserService;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-
+// thieu web serrvlet
+@WebServlet("/register")
 public class RegisterController extends HttpServlet {
     private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -28,7 +30,7 @@ public class RegisterController extends HttpServlet {
             resp.sendRedirect("login");
         } else {
             req.setAttribute("error", "Đăng ký thất bại!");
-            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("views/register.jsp").forward(req, resp);
         }
     }
 }
